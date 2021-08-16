@@ -1,0 +1,17 @@
+{
+	"name": "fmh-token-sale",
+	"version": "1.0.0",
+	"description": "FMH Token Sale ICO",
+	"main": "truffle.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"dev": "lite-server"
+	},
+	"author": "Bumstead",
+	"license": "ISC",
+	"dependencies": {
+		"lite-server": "^2.6.1"
+	}
+}

@@ -7,3 +7,4 @@ module.exports = function(deployer) {
     return deployer.deploy(FmhTokenSale, FmhToken.address, tokenPrice);  
   });
 };
+
