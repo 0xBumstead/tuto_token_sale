@@ -69,17 +69,25 @@ App = {
 		loader.show();
 		content.hide();
 
-		web3.eth.getCoinbase(function(err, account) {
-			if(err == null) {
-				App.account = account;
-				$('#accountAddress').html("Your account: " + account);
-			}
-		});
+
+
 
 		App.contracts.FmhTokenSale.deployed().then(function(instance) {
 			FmhTokenSaleInstance = instance;
+
+			web3.eth.getCoinbase(function(err, account) {
+				if(err == null) {
+					App.account = account;
+					$('#accountAddress').html("Your account: " + account);
+					console.log("Connected account:", App.account);
+				}
+			});
+
 			return FmhTokenSaleInstance.tokenPrice();
 		}).then(function(tokenPrice) {
+
+			console.log("Connected account:", App.account);
+			
 			App.tokenPrice = tokenPrice;
 			$('.token-price').html(web3.fromWei(App.tokenPrice, "ether").toNumber());
 			return FmhTokenSaleInstance.tokensSold();
