@@ -8,7 +8,6 @@ App = {
 	tokensAvailable: 750000,
 
 	init: function() {
-		console.log("App initialized.");
 		return App.initWeb3();
 	},
 
@@ -35,16 +34,10 @@ App = {
 		$.getJSON("FmhTokenSale.json", function(FmhTokenSale) {
 			App.contracts.FmhTokenSale = TruffleContract(FmhTokenSale);
 			App.contracts.FmhTokenSale.setProvider(App.web3Provider);
-			App.contracts.FmhTokenSale.deployed().then(function(FmhTokenSale) {
-				console.log("FMH Token Sale Address:", FmhTokenSale.address);
-			});
 		}).done(function() {
 			$.getJSON("FmhToken.json", function(FmhToken) {
 				App.contracts.FmhToken = TruffleContract(FmhToken);
 				App.contracts.FmhToken.setProvider(App.web3Provider);
-				App.contracts.FmhToken.deployed().then(function(FmhToken) {
-					console.log("FMH Token Address:", FmhToken.address);	
-				});
 				App.listenForEvents();
 				return App.render();
 			});
@@ -57,7 +50,6 @@ App = {
 				fromBlock: 0,
 				toBlock: 'latest',
 			}).watch(function(error, event) {
-				console.log("event triggered", event);
 				App.render();
 			});
 		});
@@ -75,9 +67,6 @@ App = {
 		loader.show();
 		content.hide();
 
-		//
-
-
 		App.contracts.FmhTokenSale.deployed().then(function(instance) {
 			FmhTokenSaleInstance = instance;
 
@@ -85,15 +74,11 @@ App = {
 				if(err == null) {
 					App.account = account;
 					$('#accountAddress').html("Your account: " + account);
-					console.log("Connected account:", App.account);
 				}
 			});
 
 			return FmhTokenSaleInstance.tokenPrice();
 		}).then(function(tokenPrice) {
-
-			console.log("Connected account:", App.account);
-
 			App.tokenPrice = tokenPrice;
 			$('.token-price').html(web3.fromWei(App.tokenPrice, "ether").toNumber());
 			return FmhTokenSaleInstance.tokensSold();
@@ -129,7 +114,6 @@ App = {
 				value: numberOfTokens * App.tokenPrice.toNumber()
 			});
 		}).then(function(result) {
-			console.log("Tokens bought…");
 			$('form').trigger('reset');			
 		});
 	}
