@@ -8,7 +8,7 @@ App = {
 	tokensAvailable: 750000,
 
 	init: function() {
-		console.log("App initialized…");
+		console.log("App initialized");
 		return App.initWeb3();
 	},
 
@@ -87,7 +87,7 @@ App = {
 		}).then(function(tokenPrice) {
 
 			console.log("Connected account:", App.account);
-			
+
 			App.tokenPrice = tokenPrice;
 			$('.token-price').html(web3.fromWei(App.tokenPrice, "ether").toNumber());
 			return FmhTokenSaleInstance.tokensSold();
