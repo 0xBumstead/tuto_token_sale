@@ -8,7 +8,7 @@ App = {
 	tokensAvailable: 750000,
 
 	init: function() {
-		console.log("App initialized");
+		console.log("App initialized…");
 		return App.initWeb3();
 	},
 
